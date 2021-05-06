@@ -29,5 +29,3 @@ export interface PostulanteBasicInfoResponse {
     fotoperfilPostulante?: ImagenInterface;
     archivocvPostulante?: ArchivoCVInterface;
 }
-
-

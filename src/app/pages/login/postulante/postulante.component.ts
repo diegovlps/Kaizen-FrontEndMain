@@ -12,7 +12,7 @@ import { PostulanteUpdate } from './postulante-interface';
 @Component({
   selector: 'app-postulante',
   templateUrl: './postulante.component.html',
-  styleUrls: []
+  styleUrls: ['./postulante.component.css']
 })
 export class PostulanteComponent implements OnInit {
   
@@ -117,6 +117,13 @@ export class PostulanteComponent implements OnInit {
           
       generoUsuario: new FormControl('', 
       Validators.required),
+
+      direccionUsuario: new FormControl('', 
+      Validators.required),
+      descripcionUsuario: new FormControl('', 
+      Validators.required),
+      telefonoUsuario: new FormControl('', 
+      Validators.required),
       
       imagenUsuario: new FormControl(null),
       archivocvUsuario: new FormControl(null)
@@ -133,21 +140,28 @@ export class PostulanteComponent implements OnInit {
       ciudadUsuario: this.postulanteModalForm.controls['ciudadUsuario'].value,
       tipodocumentoUsuario: this.postulanteModalForm.controls['tipodocumentoUsuario'].value,
       numerodocumentoUsuario: this.postulanteModalForm.controls['numerodocumentoUsuario'].value,
-      generoUsuario: this.postulanteModalForm.controls['generoUsuario'].value
+      generoUsuario: this.postulanteModalForm.controls['generoUsuario'].value,
+      direccionUsuario: this.postulanteModalForm.controls['direccionUsuario'].value,
+      descripcionUsuario: this.postulanteModalForm.controls['descripcionUsuario'].value,
+      telefonoUsuario: this.postulanteModalForm.controls['telefonoUsuario'].value
     }
 
     this.PostulanteService.update(usuario, this.CurrentUser.idPostulante).subscribe(
       data => {         
-        
         this.CurrentUserparam=data;
         this.CurrentUserparam.nombrePostulante = usuario.nombreUsuario;
         this.CurrentUserparam.apellidoPostulante = usuario.apellidoUsuario;
         this.CurrentUserparam.ciudadPostulante = usuario.ciudadUsuario;
         this.CurrentUserparam.tipodocumentoPostulante = usuario.tipodocumentoUsuario;
         this.CurrentUserparam.numerodocumentoPostulante = usuario.numerodocumentoUsuario;
+        this.CurrentUserparam.direccionPostulante = usuario.direccionUsuario;
         this.CurrentUserparam.generoPostulante = usuario.generoUsuario;
+        this.CurrentUserparam.descripcionPostulante = usuario.descripcionUsuario;
+        this.CurrentUserparam.telefonoPostulante = usuario.telefonoUsuario;
         console.log(this.CurrentUserparam);
         this.signupSuccess = true; 
+        window.location.reload();
+
       },
 
       err => {

@@ -5,6 +5,11 @@ import { ReclutadorSigninRequest } from './reclutador-signin-interface';
 import { ReclutadorSigninService } from './reclutador-signin.service';
 import {Router} from '@angular/router'
 
+//import { PostulanteSigninService } from './postulante-signin.service';
+//import { PostulanteSigninRequest } from './postulante-signin-interface';
+
+
+
 @Component({
   selector: 'app-reclutador-signin',
   templateUrl: './reclutador-signin.component.html',

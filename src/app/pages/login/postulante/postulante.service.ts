@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {PostulanteSigninRequest} from 'src/app/pages/signin/postulante/postulante-signin-interface';
+import {authInterceptorProviders} from 'src/app/util/auth.interceptor'
 import { PostulanteUpdate } from './postulante-interface';
 
 const baseUrl = 'http://localhost:8080/api/postulante';
@@ -27,8 +29,8 @@ export class PostulanteService {
     );
   }
 
-  //falta este servicio
-  updateFoto(file:PostulanteUpdate,id:any): Observable<any> {
+  
+  updateLogo(file:PostulanteUpdate,id:any): Observable<any> {
     return this.http.put(
       baseUrl+`/${id}/update/logo`,  
       file,

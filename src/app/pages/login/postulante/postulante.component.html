@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,13 +110,13 @@
                 <div class="col-lg-12 mt-3">
                     <div class="border rounded p-4">
                         <label for="">Nombre :</label><p class="text-muted">{{Usuario.nombrePostulante}}</p>
-                        <label for="">Valdivia :</label><p class="text-muted">{{Usuario.apellidoPostulante}}</p>
+                        <label for="">Apellido :</label><p class="text-muted">{{Usuario.apellidoPostulante}}</p>
                         <label for="">Ciudad :</label><p class="text-muted">{{Usuario.ciudadPostulante}}</p>
                         <label for="">Genero :</label><p class="text-muted">{{Usuario.generoPostulante}}</p>
 
                         <ul class="list-inline pt-3 border-top mb-0">
                             <li class="list-inline-item mr-3">
-                                <a href="" class="text-muted f-15 mb-0"><i class="mdi mdi-map-marker mr-2"></i>Los Olvidados de Dios 666, Lima - Perú.</a>
+                                <a href="" class="text-muted f-15 mb-0"><i class="mdi mdi-map-marker mr-2"></i>{{CurrentUserparam.direccionPostulante}}</a>
                             </li>
 
                             <li class="list-inline-item mr-3">
@@ -123,7 +124,7 @@
                             </li>
 
                             <li class="list-inline-item mr-3">
-                                <a href="" class="text-muted f-15 mb-0"><i class="mdi mdi-cellphone-iphone mr-2"></i>{{CurrentUser.telefonoPostulante}}</a>
+                                <a href="" class="text-muted f-15 mb-0"><i class="mdi mdi-cellphone-iphone mr-2"></i>{{CurrentUserparam.telefonoPostulante}}</a>
                             </li>
                         </ul>
                     </div>
@@ -290,47 +291,70 @@
 
 <!--  codigo anterior -->
 <ng-template #contenido let-modal>
-    <div class="modal-header">
-        <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="fullscreen-modal " id="modalKaizenpostulante" >
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 100%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <form  [formGroup]="postulanteModalForm" (ngSubmit)="updateUserparam()">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Descripcion</label>
+                                <textarea class="form-control" style="height: 500px;" formControlName="descripcionUsuario" [(ngModel)]="CurrentUserparam.descripcionPostulante" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputLabel" class="col-sm-2 col-form-label">Nombre</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" formControlName="nombreUsuario"  [(ngModel)]="Usuario.nombrePostulante" id="inputLabel" placeholder="Ingresa tu Nombre">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputAddress" class="col-sm-2 col-form-label">Apellido</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" formControlName="apellidoUsuario" [(ngModel)]="Usuario.apellidoPostulante" id="inputAddress" placeholder="Ingresa tu Apellido">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputphone" class="col-sm-2 col-form-label">Ciudad</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="inputphone" placeholder="Ingresa tu ciudad">
+                                </div>
+                            </div>
+                            <input type="hidden" class="form-control"  formControlName="tipodocumentoUsuario" [(ngModel)]="Usuario.tipodocumentoPostulante" required>
+                            <div class="form-group row">
+                                <label for="docnumber" class="col-sm-2 col-form-label">Documento</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" formControlName="numerodocumentoUsuario" [(ngModel)]="Usuario.numerodocumentoPostulante" id="docnumber" placeholder="Ingresa tu numero de documento">
+                                </div>
+                            </div>
+                            <input type="hidden" class="form-control"  formControlName="generoUsuario" [(ngModel)]="Usuario.generoPostulante" required>
+                            <div class="form-group row">
+                                <label for="direccionpos" class="col-sm-2 col-form-label">Direccion</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" formControlName="direccionUsuario" [(ngModel)]="CurrentUserparam.direccionPostulante"  id="direccionpos" placeholder="Ingresa tu numero de documento">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="phonnumb" class="col-sm-2 col-form-label">Telefono</label>
+                                <div class="col-sm-10">
+                                  <input type="tel" class="form-control" formControlName="telefonoUsuario" [(ngModel)]="CurrentUserparam.telefonoPostulante"  id="phonnumb" placeholder="Ingresa tu numero de telefono">
+                                </div>
+                            </div>
+                        </form>
+                    </div>   
+                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" >Guardar cambios</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="modal-body">
-
-        <form  [formGroup]="postulanteModalForm" (ngSubmit)="updateUserparam()">
-            <p>Nombre: </p>
-            <input type="text" class="form-control"  formControlName="nombreUsuario"  [(ngModel)]="Usuario.nombrePostulante" required>
-            <hr>
-            <p>Apellido: </p>
-            <input type="text" class="form-control"  formControlName="apellidoUsuario" [(ngModel)]="Usuario.apellidoPostulante" required>
-            <hr>
-            <p>Ciudad: </p>
-            <input type="text" class="form-control"  formControlName="ciudadUsuario" [(ngModel)]="Usuario.ciudadPostulante" required>
-            <hr>
-            <p> </p>
-            <input type="hidden" class="form-control"  formControlName="tipodocumentoUsuario" [(ngModel)]="Usuario.tipodocumentoPostulante" required>
-            <hr>
-            <p>Número de Documento: </p>
-            <input type="text" class="form-control"  formControlName="numerodocumentoUsuario" [(ngModel)]="Usuario.numerodocumentoPostulante" required>
-            <hr>
-            <p>Género: </p>
-            <input type="text" class="form-control"  formControlName="generoUsuario" [(ngModel)]="Usuario.generoPostulante" required>
-            <hr>
-           
-            <button type="submit" class="btn btn-success" >Ok!</button>
-        </form>
-        
-        
-    </div>
-    <div class="modal-footer">
-       
-    </div>
-</ng-template>
-
     
+</ng-template>
     <hr>
     <p> <a href="{{ Usuario.archivocvPostulante }} ">  {{ Usuario.archivocvPostulante }} </a> </p>
 
 <hr>
-
 

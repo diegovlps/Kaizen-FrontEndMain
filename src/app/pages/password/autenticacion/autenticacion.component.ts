@@ -34,6 +34,7 @@ export class AutenticacionComponent implements OnInit {
     
     if(this.tokenstorage.getToken()){
       this.cargarLink();
+      //this.route.navigate(['/postulante/update']);
     }else{
       this.route.navigate(['/signin/postulante']);
     }

@@ -4,6 +4,8 @@ import { PostulanteSignupService } from './postulante-signup.service';
 import { PostulanteSignupRequest } from './postulante-signup-interface';
 import { Ciudades, Sexos, TiposDocumento } from '../../../util/data-lists';
 import { Router} from '@angular/router'
+import { CustomValidators } from '../../tools/custom-validators';
+
 
 @Component({
   selector: 'app-postulante-signup',
@@ -11,6 +13,8 @@ import { Router} from '@angular/router'
   styles: []
 })
 export class PostulanteSignupComponent implements OnInit{
+
+  selectedGender:any = '';
 
   //Lista de Ciudades ordenados por Nombre creado en util/data-lists
   Ciudades = Ciudades.sort(function (a, b) {
@@ -38,14 +42,14 @@ export class PostulanteSignupComponent implements OnInit{
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(50),
-      Validators.pattern("([a-zA-Z',.-]+( [a-zA-Z',.-]+)*)")
+      Validators.pattern("([a-zA-Z'àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.-]+( [a-zA-Z'àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.-]+)*)")
     ])),
 
     apellidoUsuario: new FormControl('', Validators.compose([
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(50),
-      Validators.pattern("([a-zA-Z',.-]+( [a-zA-Z',.-]+)*)")
+      Validators.pattern("([a-zA-Z'àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.-]+( [a-zA-Z'àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.-]+)*)")
     ])),
 
     ciudadUsuario: new FormControl('', 
@@ -61,16 +65,18 @@ export class PostulanteSignupComponent implements OnInit{
     
     numerodocumentoUsuario: new FormControl('', Validators.compose([
       Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(12),
-      Validators.pattern("^[0-9]*$")
+      Validators.min(10000000),
+      Validators.max(999999999999)
     ])),
 
     //TODO: Regex Contraseña 
     contraseñaUsuario: new FormControl('', Validators.compose([
       Validators.required,
       Validators.minLength(8),
-      Validators.pattern("")
+      CustomValidators.patternValidator(/\d/, { passwordnumber: true }),
+      CustomValidators.patternValidator(/[A-Z]/, {passworduppercase: true}),
+      CustomValidators.patternValidator(/[a-z]/, {passwordsmallcase: true}),
+      CustomValidators.patternValidator(/[@#$:!\^%&]/, {passwordspecialcharacter: true})
     ])),
     
     generoUsuario: new FormControl('', 
@@ -82,7 +88,7 @@ export class PostulanteSignupComponent implements OnInit{
   
   constructor(private fb: FormBuilder,
               private postulantesignupService: PostulanteSignupService,
-              private route:Router) { }
+              private router: Router) { }
 
   ngOnInit(): void {}
 
@@ -127,6 +133,10 @@ export class PostulanteSignupComponent implements OnInit{
     }
   }
 
+  RBselectedGender (event:any){
+    this.selectedGender = event.target.value;
+  }
+
   guardarPostulante(): void {
 
     var usuario: PostulanteSignupRequest = {
@@ -137,14 +147,14 @@ export class PostulanteSignupComponent implements OnInit{
       tipodocumentoUsuario: this.postulantesignupForm.controls['tipodocumentoUsuario'].value,
       numerodocumentoUsuario: this.postulantesignupForm.controls['numerodocumentoUsuario'].value,
       contraseñaUsuario: this.postulantesignupForm.controls['contraseñaUsuario'].value,
-      generoUsuario: this.postulantesignupForm.controls['generoUsuario'].value
+      generoUsuario: this.selectedGender
     }
 
     this.postulantesignupService.SignUpPostulante(usuario, this.subirFotoPerfil(), this.subirArchivoCV()).subscribe(
       data => { 
         console.log(data);
-        this.route.navigate(['signin/postulante']);
-        this.signupSuccess = true; 
+        this.signupSuccess = true;
+        this.router.navigate(['/signin/postulante']);
       },
 
       err => {

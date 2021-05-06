@@ -1,5 +1,3 @@
-import { ImagenInterface} from 'src/app/pages/tools/general-interface';
-
 export interface PostulanteUpdate    {
     nombreUsuario: string;
     apellidoUsuario: string;
@@ -7,4 +5,7 @@ export interface PostulanteUpdate    {
     tipodocumentoUsuario: string;
     numerodocumentoUsuario: string;
     generoUsuario: string;
+    direccionUsuario: string;
+    descripcionUsuario: string;
+    telefonoUsuario: string;
 }

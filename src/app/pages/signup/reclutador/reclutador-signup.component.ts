@@ -5,6 +5,7 @@ import { ReclutadorSignupService } from './reclutador-signup.service';
 import { Ciudades, Tempresa } from '../../../util/data-lists';
 import { Router} from '@angular/router'
 
+
 @Component({
   selector: 'app-reclutador-signup',
   templateUrl: './reclutador-signup.component.html',
@@ -15,7 +16,6 @@ export class ReclutadorSignupComponent implements OnInit {
 
   selectedLogo?: FileList;
   currentLogo?: File;
-  Tempresas = Tempresa ;
 
   Ciudades = Ciudades.sort(function (a, b) {
     if (a.text > b.text) {
@@ -31,7 +31,8 @@ export class ReclutadorSignupComponent implements OnInit {
     }
   })
 
-  
+  Tempresas = Tempresa ;
+   
   seleccionarLogo(event: any): void{
     this.selectedLogo = event.target.files;
   }
@@ -59,9 +60,6 @@ public reclutadorsignupForm = this.fb.group({
   ])),
 
   ciudadUsuario: new FormControl('', 
-  Validators.required),
-
-  telefonoUsuario: new FormControl('', 
   Validators.required),
   
   emailUsuario: new FormControl('', Validators.compose([
@@ -93,13 +91,17 @@ public reclutadorsignupForm = this.fb.group({
   tamañoempresaUsuario: new FormControl('', 
   Validators.required),  
 
+  telefonoUsuario: new FormControl('', 
+  Validators.required),  
+
   imagenUsuario: [null]
 
 });
+  
 
   constructor(private fb: FormBuilder,
               private reclutadorsignupServie: ReclutadorSignupService,
-              private route:Router) { }
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -115,36 +117,25 @@ public reclutadorsignupForm = this.fb.group({
       emailUsuario: this.reclutadorsignupForm.controls['emailUsuario'].value,
       numerodocumentoUsuario: this.reclutadorsignupForm.controls['numerodocumentoUsuario'].value,      
       contraseñaUsuario: this.reclutadorsignupForm.controls['contraseñaUsuario'].value,
-      telefonoUsuario: this.reclutadorsignupForm.controls['telefonoUsuario'].value,
       nombrecontactanteUsuario: this.reclutadorsignupForm.controls['nombrecontactanteUsuario'].value,
-      tamañoempresaUsuario: this.reclutadorsignupForm.controls['tamañoempresaUsuario'].value
+      tamañoempresaUsuario: this.reclutadorsignupForm.controls['tamañoempresaUsuario'].value,
+      telefonoUsuario: this.reclutadorsignupForm.controls['telefonoUsuario'].value
     }
-    /**Falta Construir en el html la carga de archivo
-     * var logoempresa: File;
-     * logoempresa = this.reclutadorsignupForm.controls['imagenUsuario'].value;
-     */
-    
 
     this.reclutadorsignupServie.SignUpReclutador(usuario, this.subirLogo()).subscribe(
       data => { 
         console.log(data);
-        this.route.navigate(['/signin/reclutador']);
-        this.signupSuccess = true;
+        this.router.navigate(['/signin/reclutador'])
+        this.signupSuccess = true; 
       },
 
       err => {
         this.errorMessage = err.error.message;
         this.signupSuccess = false;
-      });
+      }
+    );
   }
+
 }
 
-/* 
 
-public postulanteLogin = this.fb.group({
-guardarUser(): void {
-
-    var usuario: PostulanteSignupRequest = {
-      emailUsuario: this.postulanteLogin.controls['emailUsuario'].value,
-      contraseñaUsuario: this.postulanteLogin.controls['contraseñaUsuario'].value,
-    } )}*/

@@ -32,9 +32,15 @@ export class PasswordComponent implements OnInit {
     }
     this.passwordservice.getEmail(usuario.emailUsuario).subscribe(
       data => {
-        this.tokenstorage.saveToken(data.passwordresetToken);
+        this.tokenstorage.saveToken(data.passwordresetToken
+          );
         console.log(data);
-    })
+    }
+    )
+
   }
 
+
+
 }
+          

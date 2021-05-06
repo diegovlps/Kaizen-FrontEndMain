@@ -3,8 +3,8 @@ import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const baseUrl = 'http://localhost:8080/api/forgotpassword/sendemail';
-const AutUrl = "http://localhost:8080/api/reset_password";
-const updUrl = "http://localhost:8080/api/forgotpassword/update";
+const AutUrl = "http://localhost:8080/api/reset_password"
+const updUrl = "http://localhost:8080/api/forgotpassword/update"
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +35,8 @@ export class PasswordService {
 
 
   updatePassword(newtoken:any,password:any){
-  
+    
+    
     var changepass: FormData = new FormData();
     changepass.append('contraseña',password),
     changepass.append('token',newtoken)

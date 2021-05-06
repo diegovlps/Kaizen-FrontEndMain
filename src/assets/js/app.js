@@ -17,14 +17,14 @@ Autor: José Soplin Roncal
     }); 
 
     // Selectize
-   /* $('#select-category, #select-lang,#select-country').selectize({
+    $('#select-category, #select-lang,#select-country').selectize({
         create: true,
         sortField: {
             field: 'text',
             direction: 'asc'
         },
         dropdownParent: 'body'
-    });*/
+    });
 
     // Seleccionar todos los checkboxs
     $("#customCheckAll").click(function() {

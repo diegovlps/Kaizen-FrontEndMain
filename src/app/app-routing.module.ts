@@ -6,21 +6,20 @@ import { PostulanteSignupComponent } from './pages/signup/postulante/postulante-
 import { ReclutadorSignupComponent } from './pages/signup/reclutador/reclutador-signup.component';
 import { PostulanteComponent} from './pages/login/postulante/postulante.component';
 import { ReclutadorComponent } from './pages/login/reclutador/reclutador.component';
-import {PasswordComponent} from './pages/password/password.component';
-import {PasswordupdateComponent} from './pages/password/passwordupdate/passwordupdate.component'
-import {AutenticacionComponent} from './pages/password/autenticacion/autenticacion.component';
-import {PublicacionComponent} from './pages/puestostrabajo/publicacion/publicacion.component';
-import {PostulacionComponent} from './pages/puestostrabajo/postulacion/postulacion.component';
-import {ListaempleosComponent} from './pages/puestostrabajo/listaempleos/listaempleos.component';
-import {HomeComponent} from './pages/puestostrabajo/home/home.component';
-import {DetalletrabajoComponent} from './pages/puestostrabajo/detalletrabajo/detalletrabajo.component'
 
-//Ruteo para entrar a la paginas de Internet "http://localhost:4200/Routes"
+import { PasswordComponent} from './pages/password/password.component';
+import { PasswordupdateComponent} from './pages/password/passwordupdate/passwordupdate.component'
+import { AutenticacionComponent } from './pages/password/autenticacion/autenticacion.component';
 
-/** Linea 29 "usuario" por "postulante" en Back 
- *  Ya que postulante y reclutador usan mismo servicio
- *  redirect del back ha sido cambiado por update/password 
- */
+import { PostulacionComponent } from './pages/puestodetrabajo/postulacion/postulacion.component';
+import { PublicacionComponent} from './pages/puestodetrabajo/publicacion/publicacion.component';
+
+import { ListaTrabajosComponent } from './pages/puestodetrabajo/lista-trabajos/lista-trabajos.component';
+
+import { HomeComponent } from './pages/puestodetrabajo/home/home.component';
+import {DetalletrabajoComponent} from './pages/puestodetrabajo/detalletrabajo/detalletrabajo.component'
+
+ 
 const routes: Routes = [
   { path: 'signin/postulante', component: PostulanteSigninComponent},
   { path: 'signin/reclutador', component: ReclutadorSigninComponent},
@@ -28,12 +27,12 @@ const routes: Routes = [
   { path: 'signup/reclutador', component: ReclutadorSignupComponent},
   { path: 'login/postulante/:idPostulante/profile/basicinfo', component:PostulanteComponent},
   { path: 'login/reclutador/:idReclutador/profile/basicinfo', component:ReclutadorComponent},
-  { path: 'changepassword', component:PasswordComponent},
+  { path: 'password', component:PasswordComponent},
   { path: 'api/reset_password/:newtoken', component:AutenticacionComponent},
   { path: 'update/password', component:PasswordupdateComponent},
   { path: 'reclutador/:idReclutador/publicar', component:PublicacionComponent},
   { path: 'postulante/:idPostulante/postular/puestotrabajo', component:PostulacionComponent},
-  { path: 'home/show/all', component:ListaempleosComponent},
+  { path: 'postulante/home/show/all', component:ListaTrabajosComponent},
   { path: 'index', component:HomeComponent},
   { path: 'puestrotrabajo/:idPuestoTrabajo/detail', component:DetalletrabajoComponent}
 ];

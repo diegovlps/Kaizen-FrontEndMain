@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router'
 @Component({
   selector: 'app-passwordupdate',
   templateUrl: './passwordupdate.component.html',
-  styleUrls: ['./passwordupdate.component.css']
+  styleUrls: []
 })
 export class PasswordupdateComponent implements OnInit {
   acceso:any = [];
@@ -50,8 +50,8 @@ export class PasswordupdateComponent implements OnInit {
         console.log(data);
     })
     this.tokenstorage.signOut();
-    this.route.navigate(['/signin/postulante']);
   }
+
 
    
 }

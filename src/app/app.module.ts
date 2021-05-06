@@ -1,22 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'; 
-import { NgxPaginationModule } from 'ngx-pagination';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SigninModule } from './pages/signin/signin.module';
 import { SignupModule } from './pages/signup/signup.module';
+import { LoginModule } from './pages/login/login.module';
+
 import { authInterceptorProviders } from './util/auth.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginModule } from './pages/login/login.module';
 import { PasswordModule } from './pages/password/password.module';
-import { PuestoTrabajoModule } from './pages/puestostrabajo/puestotrabajo.module';
+
+import { PuestodetrabajoModule } from './pages/puestodetrabajo/puestodetrabajo.module'
+
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
+    
+   
   ],
   imports: [
     BrowserModule,
@@ -27,8 +35,9 @@ import { PuestoTrabajoModule } from './pages/puestostrabajo/puestotrabajo.module
     LoginModule,
     NgbModule,
     PasswordModule,
-    PuestoTrabajoModule,
+    PuestodetrabajoModule,
     NgxPaginationModule
+    
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
